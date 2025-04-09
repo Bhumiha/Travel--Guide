@@ -1,4 +1,4 @@
-FFROM python:3.11
+FROM python:3.11
 
 # Avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
