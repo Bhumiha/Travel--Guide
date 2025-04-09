@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-vex3%bq7byz=55)q#c_i3*n0_f90e2g)##xsdpwz=-(_y-wz7+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['TRAVEL-GUIDE-AI.onrender.com']
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -104,11 +108,11 @@ WSGI_APPLICATION = 'travelling.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'user',
-        'USER': 'root',
-        'PASSWORD':'Raunak@123',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'NAME': os.environ.get('user'),
+        'USER': os.environ.get('root'),
+        'PASSWORD': os.environ.get('Raunak@123'),
+        'HOST': os.environ.get('127.0.0.1'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
     }
 }
 
