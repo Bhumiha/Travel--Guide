@@ -1,13 +1,9 @@
 FROM python:3.11
 
-# Avoid interactive prompts during package installation
+# Avoid prompts during install
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Install system dependencies
+# Install system-level dependencies required for PyAudio and MySQL
 RUN apt-get update && apt-get install -y \
     build-essential \
     gcc \
@@ -16,21 +12,20 @@ RUN apt-get update && apt-get install -y \
     libmysqlclient-dev \
     default-libmysqlclient-dev \
     curl \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container
-COPY . /app/
+# Copy project files
+COPY . .
 
-# Install Python dependencies
+# Upgrade pip and install Python dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Expose port
+# Expose the port Django runs on
 EXPOSE 8000
 
-# Run the Django development server
+# Start the Django app
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
