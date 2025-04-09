@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Install required system dependencies for PyAudio and MySQL
+# Install system dependencies for PyAudio and MySQL client
 apt-get update && apt-get install -y \
   portaudio19-dev \
   libasound-dev \
@@ -8,6 +8,6 @@ apt-get update && apt-get install -y \
   build-essential \
   gcc
 
-# Install Python dependencies
+# Upgrade pip and install Python dependencies
 pip install --upgrade pip
 pip install -r requirements.txt
